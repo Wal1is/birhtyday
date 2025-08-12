@@ -188,17 +188,55 @@
         display: flex;
         justify-content: center;
       }
-      
+      .number-candles {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        pointer-events: none;
+      }
+      .number-candle {
+        position: relative;
+        width: 30px;
+        height: 45px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #7B020B;
+        border-radius: 10px/5px;
+      }
+      .candle-number {
+        font-family: 'Pacifico', cursive;
+        color: #fff;
+        font-size: 28px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 5px;
+        text-shadow: 1px 1px 0 #f4801b;
+        pointer-events: none;
+     }
+    
     </style>
   </head>
   <body>
     <canvas id="confettiCanvas"></canvas>
     <div class="happy-birthday-banner">HAAAAPPPPPPYYYYYYY BIIIRTTTHHHDAAAYYYY LLIIAA!!!!!</div>
-    <div class="candle-count-display">
-      Number of candles on cake: <span id="candleCount">0</span>
-    </div>
     <div class="cake-container">
       <div class="cake">
+        <div class="number-candles">
+          <div class="candle number-candle">
+            <span class="candle-number">1</span>
+            <div class="flame"></div>
+          </div>
+          <div class="candle number-candle">
+            <span class="candle-number">8</span>
+            <div class="flame"></div>
+          </div>
+        </div>
         <div class="plate"></div>
         <div class="layer layer-bottom"></div>
         <div class="layer layer-middle"></div>
@@ -272,39 +310,6 @@
         drawConfetti();
       })();
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const cake = document.querySelector(".cake");
-        const candleCountDisplay = document.getElementById("candleCount");
-        let candles = [];
-
-        function updateCandleCount() {
-          const activeCandles = candles.filter(
-            (candle) => !candle.classList.contains("out")
-          ).length;
-          candleCountDisplay.textContent = activeCandles;
-        }
-
-        function addCandle(left, top) {
-          const candle = document.createElement("div");
-          candle.className = "candle";
-          candle.style.left = left + "px";
-          candle.style.top = top + "px";
-
-          const flame = document.createElement("div");
-          flame.className = "flame";
-          candle.appendChild(flame);
-
-          cake.appendChild(candle);
-          candles.push(candle);
-          updateCandleCount();
-        }
-
-        cake.addEventListener("click", function (event) {
-          const rect = cake.getBoundingClientRect();
-          const left = event.clientX - rect.left;
-          const top = event.clientY - rect.top;
-          addCandle(left, top);
-        });
       });
         // Mic-based candle blowing logic
         navigator.mediaDevices.getUserMedia({ audio: true })
